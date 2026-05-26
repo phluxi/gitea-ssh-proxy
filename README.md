@@ -1,4 +1,12 @@
-# GitLab SSH Proxy
+# Gitea SSH Proxy
+**This is a fork from the awesome [Gitlab SSH Proxy](https://github.com/rendyanthony/gitlab-ssh-proxy) by [rendyanthony](https://github.com/rendyanthony).**
+
+I modified the files to work with Gitea, adjusted the documentation and improved the installations script a bit.
+Most of the credit goes to the original Author and his amazing work.
+
+**NOTE:** I have only tested this on my own setup on an Ubuntu 24.04 Machine without SE_LINUX. So I don't know if that module works.
+
+---
 
 One if the issue with running a GitLab instance in a container is to expose the GitLab SSH in the host machine without conflicting with the existing SSH port (22) on the host.
 
