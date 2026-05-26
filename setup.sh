@@ -24,7 +24,7 @@ install_pkg() {
 	set -e
 
 	install $SRC_DIR/gitea-keys-check $PREFIX/bin
-	install $SRC_DIR/gitea-shell-proxy $PREFIX/bin
+	install $SRC_DIR/gitea-cli-proxy $PREFIX/bin
 
 	if [[ $SE_LINUX != "no" ]]; then
 		test ! -e $BUILD_DIR/gitea-ssh.pp && build
@@ -47,7 +47,7 @@ install_pkg() {
 
 remove() {
 	test -e $PREFIX/bin/gitea-keys-check && rm $PREFIX/bin/gitea-keys-check
-	test -e $PREFIX/bin/gitea-shell-proxy && rm $PREFIX/bin/gitea-shell-proxy
+	test -e $PREFIX/bin/gitea-cli-proxy && rm $PREFIX/bin/gitea-cli-proxy
 	test -e /etc/ssh/sshd_config.d/99-gitea-proxy.conf && rm /etc/ssh/sshd_config.d/99-gitea-proxy.conf
 	( semodule -l | grep gitea-ssh > /dev/null ) && semodule -r gitea-ssh
 }

@@ -11,4 +11,4 @@ DIR_NAME=$(readlink -f $(dirname $0))
 
 /usr/bin/ssh -p ${GITEA_PORT:-2222} -o StrictHostKeyChecking=no ${GITEA_HOST:-git@localhost} \
     /usr/local/bin/gitea keys -e git -u $2 -t $3 -k $4 | \
-    sed "s:/usr/local/bin/gitea:${DIR_NAME}/gitea-shell-proxy:"
+    sed "s:/usr/local/bin/gitea:${DIR_NAME}/gitea-cli-proxy:"
