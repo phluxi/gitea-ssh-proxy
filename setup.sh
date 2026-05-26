@@ -12,8 +12,8 @@ build() {
 	set -e
 
 	mkdir -p $BUILD_DIR
-	checkmodule -M -m -o $BUILD_DIR/gitlab-ssh.mod $SRC_DIR/gitlab-ssh.te
-	semodule_package -o $BUILD_DIR/gitlab-ssh.pp -m $BUILD_DIR/gitlab-ssh.mod
+	checkmodule -M -m -o $BUILD_DIR/gitea-ssh.mod $SRC_DIR/gitea-ssh.te
+	semodule_package -o $BUILD_DIR/gitea-ssh.pp -m $BUILD_DIR/gitea-ssh.mod
 
 	test -n "$SUDO_UID" && chown -R $SUDO_UID:$SUDO_GID $BUILD_DIR
 
@@ -23,38 +23,38 @@ build() {
 install_pkg() {
 	set -e
 
-	install $SRC_DIR/gitlab-keys-check $PREFIX/bin
-	install $SRC_DIR/gitlab-shell-proxy $PREFIX/bin
+	install $SRC_DIR/gitea-keys-check $PREFIX/bin
+	install $SRC_DIR/gitea-shell-proxy $PREFIX/bin
 
 	if [[ $SE_LINUX != "no" ]]; then
-		test ! -e $BUILD_DIR/gitlab-ssh.pp && build
-		semodule -i $BUILD_DIR/gitlab-ssh.pp
+		test ! -e $BUILD_DIR/gitea-ssh.pp && build
+		semodule -i $BUILD_DIR/gitea-ssh.pp
 	else
 		mkdir -p $BUILD_DIR
 	fi
 
-	sed -E "s#/usr/local#${PREFIX}#" $SRC_DIR/99-gitlab-proxy.conf > $BUILD_DIR/99-gitlab-proxy.conf
+	sed -E "s#/usr/local#${PREFIX}#" $SRC_DIR/99-gitea-proxy.conf > $BUILD_DIR/99-gitea-proxy.conf
 
 	if [[ -d /etc/ssh/sshd_config.d ]]; then
-		cp $BUILD_DIR/99-gitlab-proxy.conf /etc/ssh/sshd_config.d/99-gitlab-proxy.conf
+		cp $BUILD_DIR/99-gitea-proxy.conf /etc/ssh/sshd_config.d/99-gitea-proxy.conf
 	else
 		echo "Warning: /etc/ssh/sshd_config.d directory is missing"
-		echo "Please manually add the contents of $BUILD_DIR/99-gitlab-proxy.conf to your /etc/ssh/sshd_config configuration"
+		echo "Please manually add the contents of $BUILD_DIR/99-gitea-proxy.conf to your /etc/ssh/sshd_config configuration"
 	fi
 
 	set +e
 }
 
 remove() {
-	test -e $PREFIX/bin/gitlab-keys-check && rm $PREFIX/bin/gitlab-keys-check
-	test -e $PREFIX/bin/gitlab-shell-proxy && rm $PREFIX/bin/gitlab-shell-proxy
-	test -e /etc/ssh/sshd_config.d/99-gitlab-proxy.conf && rm /etc/ssh/sshd_config.d/99-gitlab-proxy.conf
-	( semodule -l | grep gitlab-ssh > /dev/null ) && semodule -r gitlab-ssh
+	test -e $PREFIX/bin/gitea-keys-check && rm $PREFIX/bin/gitea-keys-check
+	test -e $PREFIX/bin/gitea-shell-proxy && rm $PREFIX/bin/gitea-shell-proxy
+	test -e /etc/ssh/sshd_config.d/99-gitea-proxy.conf && rm /etc/ssh/sshd_config.d/99-gitea-proxy.conf
+	( semodule -l | grep gitea-ssh > /dev/null ) && semodule -r gitea-ssh
 }
 
 show_help() {
 	cat <<EOD
-GitLab SSH Proxy
+Gitea SSH Proxy
 
 Usage:
   ./setup.sh [commands]...
