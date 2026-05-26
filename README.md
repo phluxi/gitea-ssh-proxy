@@ -1,7 +1,7 @@
 # Gitea SSH Proxy
 **This is a fork from the awesome [Gitlab SSH Proxy](https://github.com/rendyanthony/gitlab-ssh-proxy) by [rendyanthony](https://github.com/rendyanthony).**
 
-I modified the files to work with Gitea and adjusted the documentation.
+I modified the it to work with Gitea and adjusted the documentation.
 Most of the credit goes to the original author and his amazing work.
 
 **NOTE:** I have only tested this on my own setup on an Ubuntu 24.04 Machine without SE_LINUX. So I don't know if that module works.
