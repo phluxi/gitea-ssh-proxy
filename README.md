@@ -1,5 +1,6 @@
 # Gitea SSH Proxy
-**This is a fork from the awesome [Gitlab SSH Proxy](https://github.com/rendyanthony/gitlab-ssh-proxy) by [rendyanthony](https://github.com/rendyanthony).**
+
+### **This is a fork from the awesome [Gitlab SSH Proxy](https://github.com/rendyanthony/gitlab-ssh-proxy) by [rendyanthony](https://github.com/rendyanthony).**
 
 I modified the it to work with Gitea and adjusted the documentation.
 Most of the credit goes to the original author and his amazing work.
