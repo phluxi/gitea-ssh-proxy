@@ -7,6 +7,6 @@ for conf_dir in $HOME/.config /etc; do
     fi
 done
 
-/usr/bin/ssh -p ${GITEA_PORT:-2222} -o StrictHostKeyChecking=no ${GITEA_HOST:-git@localhost} \
+/usr/bin/ssh -p ${GITEA_PORT:-222} -o StrictHostKeyChecking=no ${GITEA_HOST:-git@localhost} \
     "SSH_ORIGINAL_COMMAND=\"${SSH_ORIGINAL_COMMAND}\" \
     /usr/local/bin/gitea $@"
