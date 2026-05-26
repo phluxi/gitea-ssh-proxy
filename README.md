@@ -50,7 +50,7 @@ Create a new SSH key-pair
 sudo su - git -c "ssh-keygen -t ed25519"
 ```
 
-Assuming the Gitea container is names "gitea", write the public key to /data/git/.ssh/authorized_keys.
+Assuming the Gitea container is named "gitea", write the public key to /data/git/.ssh/authorized_keys.
 
 ```bash
 sudo sh -c "cat /home/git/.ssh/id_ed25519.pub | docker exec -i gitea sh -c 'cat >> /data/git/.ssh/authorized_keys'"
